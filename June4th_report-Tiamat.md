@@ -194,3 +194,4 @@ The `Solo.out/Gene/filtered/barcodes.tsv` file is also a required input for `ste
 - `--mem=0` requests all node memory — is this appropriate for a shared cluster, or should we specify a value (e.g., 60G)?
 - The protocol uses `--soloCellFilter EmptyDrops_CR` but our Siletti data was originally processed with Cell Ranger. Will the cell calls be consistent with the published barcodes?
 - For the full herv-brain-atlas pipeline (606 samples), what is the expected per-sample runtime at 16 CPUs to plan batch scheduling?
+- How does a BAM file looks like and how can I interpret each column?
