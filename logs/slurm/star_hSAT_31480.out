@@ -1,0 +1,13 @@
+/efs/users/paulina/miniconda3/envs/stellarscope_protocol/bin/STAR-avx2 --runThreadN 16 --genomeDir resources/reference_genome/star --readFilesIn results/fastq/hSAT/SRR31277936_2.fastq.gz,results/fastq/hSAT/SRR31277937_2.fastq.gz results/fastq/hSAT/SRR31277936_1.fastq.gz,results/fastq/hSAT/SRR31277937_1.fastq.gz --readFilesCommand gunzip
+ -c --soloCBwhitelist resources/whitelist/3M-february-2018.txt --soloType CB_UMI_Simple --soloCBstart 1 --soloCBlen 16 --soloUMIstart 17 --soloUMIlen 12 --outSAMattributes N
+H HI AS nM MD CR CY UR UY CB UB GX GN sS sQ sM --outSAMtype BAM SortedByCoordinate --outFilterScoreMin 30 --outFilterMultimapNmax 200 --outFilterMultimapScoreRange 5 --soloC
+ellFilter EmptyDrops_CR --outFileNamePrefix results/star_alignment_multi/hSAT/ --outTmpDir results/star_alignment_multi/hSAT/_STARtmp
+        STAR version: 2.7.11b   compiled: 2025-11-14T12:06:42+0000 :/opt/conda/conda-bld/star_1763121846936/work/source
+Jun 04 13:42:47 ..... started STAR run
+Jun 04 13:42:48 ..... loading genome
+Jun 04 13:42:56 ..... started mapping
+Jun 04 14:07:40 ..... finished mapping
+Jun 04 14:07:43 ..... started Solo counting
+Jun 04 14:15:59 ..... finished Solo counting
+Jun 04 14:15:59 ..... started sorting BAM
+Jun 04 14:31:10 ..... finished successfully
