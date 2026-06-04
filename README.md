@@ -1,6 +1,6 @@
 # Stellarscope Protocol — Training Repository
 
-**Authors:** Ian Marston & Paulina Gonzalez Perez  
+**Authors:** Ian & Paulina
 **Supervisor:** Helena Reyes-Gopar  
 **Date:** June 2026  
 **Reference protocol:** Liotta et al. (2025), STAR Protocols — *Quantifying locus-specific transposable element transcripts in single-cell RNA-seq data with Stellarscope*
@@ -15,9 +15,7 @@ immediate goal is to successfully execute the full STARsolo + Stellarscope pipel
 publicly available snRNA-seq dataset (human subcutaneous adipose tissue, donor 3399),
 understand every step of the process, and produce documented, reproducible outputs.
 
-This is a training exercise in preparation for running the same pipeline at scale on
-~606 samples from the Siletti et al. 2023 Adult Human Brain Atlas
-(DOI: 10.1126/science.add7046).
+This is a training exercise in preparation for running the same pipeline with our own data.
 
 ---
 
@@ -25,14 +23,7 @@ This is a training exercise in preparation for running the same pipeline at scal
 
 The following instructions were given by Helena Reyes-Gopar:
 
-> Hi Ian and Paulina,
->
-> Today I'd like you to work through the Stellarscope protocol together so Paulina can get
-> up to speed before running her own single-cell RNA-seq dataset. Ian, you have been
-> working with the Protocol, so you can tell Paulina what you've learned so far, but I want
-> you both to work together on running it.
->
-> Please make sure you both have clear understanding of:
+> Have clear understanding of:
 >
 > - **Protocol steps:** what's the complete workflow?
 > - **Inputs and outputs:** what files go in, what comes out of each step? What are they?
@@ -42,35 +33,7 @@ The following instructions were given by Helena Reyes-Gopar:
 > - **The alignment command, how is it constructed?**
 >   - What is STAR, and what's it doing?
 >   - What do the parameters mean and why are they set the way they are?
->
-> Now, Ian has already tried the alignment step, and I want you two to figure out what
-> happened, check the output of the command line, what is it telling you? Check the log
-> files, what is reported in there?
->
-> Once you've covered those, figure out together how to run the alignment on the AWS
-> server using SLURM.
->
-> Here is some information about SLURM and the cluster setup:
-> When we work in the projects directory, we're actually on the entry server, so the
-> gateway to our compute cluster. The entry server is intentionally small and fast for
-> interactive work like file management and script editing, but it's not meant for intensive
-> computational jobs. The real compute power lives on compute nodes: separate machines
-> across the cluster that are connected and managed by SLURM.
->
-> SLURM is essentially a job scheduler and resource manager. Instead of trying to run your
-> alignment command directly on the entry server (which would overload it), you write a
-> SLURM script that says: "Here's a job I want to run. Here's how much memory it needs,
-> how many CPUs, how long it might take." You then submit that script to SLURM, which
-> reads your request and finds an available compute node with the resources you asked for,
-> then runs your job there. You get back to the entry server immediately — your job runs
-> in the background.
->
-> So the workflow is: you're on the entry server in projects, you craft your alignment
-> command in a script, you submit it to SLURM with `sbatch` (or similar), and SLURM farms
-> it out to one of the compute nodes. The nodes are all networked together, so they can all
-> access the same shared storage where your FASTQ files and reference genome live. Once
-> the job finishes, the output files are waiting for you whenever you're ready to keep
-> working.
+>   - Check the output of the command line, what is it telling you? Check the log files
 >
 > **Primary aims:**
 >
@@ -99,11 +62,6 @@ The following instructions were given by Helena Reyes-Gopar:
 >    - What was your starting knowledge and what didn't you know?
 >    - What did you do step-by-step?
 >    - What did you learn? What questions remain?
->
->    One of you will type/run the commands; the other will actively document what's
->    happening in real time. You can switch at any time, but this is collaborative — talk
->    through every step together. Run the alignment once (you only need one successful
->    example), but make sure both of you understand every part of the process.
 
 ---
 
@@ -151,21 +109,13 @@ stellarscope_protocol/
 ├── README.md                          # this file
 ├── logs/
 │   └── slurm/                         # SLURM stdout/stderr logs
-├── resources/
-│   ├── reference_genome/star/         # pre-built STAR index (GRCh38, GENCODE v43)
-│   ├── te_annotation/                 # retro.hg38.v1.gtf (Bendall et al.)
-│   └── whitelist/                     # 10x v3 barcode whitelist (3M-february-2018.txt)
 ├── results/
-│   ├── fastq/hSAT/                    # FASTQ files (symlinked from shared directory)
-│   ├── star_alignment_multi/hSAT/     # STAR outputs
-│   ├── stellarscope/hSAT/             # Stellarscope outputs
-│   └── downstream/                    # Seurat objects and downstream analysis
 ├── workflow/
 │   └── scripts/
 │       └── downstream_analysis.Rmd    # R downstream analysis script
-├── slurm_STARsolo_stellarscopeprotocol.sh   # SLURM job script for STAR alignment
+│       └── slurm_STARsolo_stellarscopeprotocol.sh   # SLURM job script for STAR alignment
 └── docs/
-    └── process_log_STARsolo_alignment.md    # step-by-step process log
+    └── reports.md    # step-by-step process log
 ```
 
 ---
@@ -185,12 +135,6 @@ Source: https://github.com/mlbendall/telescope_annotation_db
 
 **Barcode whitelist:** 10x Genomics Chromium Single Cell 3' v3 chemistry  
 (3M-february-2018.txt)
-
-> **Note on data access:** The FASTQ files, genome index, TE annotation, and whitelist were
-> provided via a shared directory by Ian Marston. Symlinks point from `resources/` and
-> `results/fastq/` to the shared location. The SRA Toolkit download approach described in
-> the original protocol could not be used due to a GLIBC version incompatibility on the
-> cluster (`GLIBC_2.27` not found on CentOS). See the process log for details.
 
 ---
 
