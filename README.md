@@ -230,7 +230,7 @@ Rscript -e 'rmarkdown::render("workflow/scripts/downstream_analysis.Rmd",
 Detailed step-by-step notes, including what we knew going in, what we did, what we
 learned, and open questions, are in:
 
-`docs/process_log_STARsolo_alignment.md`
+`docs/`
 
 ---
 
