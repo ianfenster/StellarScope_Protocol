@@ -1,0 +1,9 @@
+mkdir -p results/fastq/hSAT
+
+cd results/fastq/hSAT
+
+curl -L -O https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR312/036/SRR31277936/SRR31277936_1.fastq.gz
+curl -L -O https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR312/036/SRR31277936/SRR31277936_2.fastq.gz
+
+curl -L -O https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR312/037/SRR31277937/SRR31277937_1.fastq.gz
+curl -L -O https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR312/037/SRR31277937/SRR31277937_2.fastq.gz
